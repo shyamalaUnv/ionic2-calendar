@@ -25,8 +25,7 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
   today: Date;
   previousDay: any;
   selectedDay: any;
-  i :number = 0;
-  selDate : Date = new Date()
+  selDate: Date = new Date()
   wHeads: string[];
 
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
@@ -160,17 +159,10 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
 
 
   public findMonth(date: Date) {
-   this.i= this.i + 1;
-   if(this.i == 1){
-     let momentDate = moment(date);
-     var selMonth =  momentDate.format('MMMM - YYYY').toUpperCase();
-   }
-   else{
-     date = this.selDate;
-   let momentDate = moment(date);
-   return momentDate.format('MMMM - YYYY').toUpperCase();
-   }
- }
+    date = this.selDate;
+    let momentDate = moment(date);
+    return momentDate.format('MMMM - YYYY').toUpperCase();
+  }
   /**
    * Implements ngOnDestroy event handler.
    */
@@ -297,5 +289,5 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  
+
 }
