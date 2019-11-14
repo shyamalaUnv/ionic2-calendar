@@ -25,7 +25,8 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
   today: Date;
   previousDay: any;
   selectedDay: any;
-
+  i :number = 0;
+  selDate : Date = new Date()
   wHeads: string[];
 
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
@@ -140,8 +141,43 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
       month.push(weekDay);
     }
     this.month = month;
+    if (date) {
+      this.selDate = new Date(date);
+      console.log(this.selDate.getDate(), this.selDate.getMonth(), this.selDate.getFullYear())
+      this.month.forEach((w: any) => {
+        w.forEach((d: any) => {
+          if (d.day.getDate() === this.selDate.getDate()
+            && d.day.getMonth() === this.selDate.getMonth()
+            && d.day.getFullYear() === this.selDate.getFullYear()) {
+            d.selected = true;
+            this.selectedDay = d;
+            this.previousDay = d;
+          }
+        });
+      });
+      this.findMonth(this.selDate);
+    }
   }
 
+
+  public findMonth(date: Date) {
+    console.log("this.selDate = "+this.selDate)
+   this.i= this.i + 1;
+   console.log(" i = "+this.i)
+   if(this.i == 1){
+     let momentDate = moment(date);
+     console.log("momentDate = "+momentDate , JSON.stringify(momentDate));
+     console.log("momentDate.format('MMMM - YYYY').toUpperCase() = "+momentDate.format('MMMM - YYYY').toUpperCase())
+     var selMonth =  momentDate.format('MMMM - YYYY').toUpperCase();
+   }
+   else{
+     date = this.selDate;
+   let momentDate = moment(date);
+   console.log("momentDate = "+momentDate , JSON.stringify(momentDate))
+   console.log("momentDate.format('MMMM - YYYY').toUpperCase() = "+momentDate.format('MMMM - YYYY').toUpperCase())
+   return momentDate.format('MMMM - YYYY').toUpperCase();
+   }
+ }
   /**
    * Implements ngOnDestroy event handler.
    */
@@ -268,8 +304,5 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  public niceMonth(date: Date) {
-    let momentDate = moment(date);
-    return momentDate.format('MMMM - YYYY').toUpperCase();
-  }
+  
 }
