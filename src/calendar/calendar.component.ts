@@ -143,7 +143,6 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
     this.month = month;
     if (date) {
       this.selDate = new Date(date);
-      console.log(this.selDate.getDate(), this.selDate.getMonth(), this.selDate.getFullYear())
       this.month.forEach((w: any) => {
         w.forEach((d: any) => {
           if (d.day.getDate() === this.selDate.getDate()
@@ -161,20 +160,14 @@ export class CalendarComponent implements OnChanges, OnInit, OnDestroy {
 
 
   public findMonth(date: Date) {
-    console.log("this.selDate = "+this.selDate)
    this.i= this.i + 1;
-   console.log(" i = "+this.i)
    if(this.i == 1){
      let momentDate = moment(date);
-     console.log("momentDate = "+momentDate , JSON.stringify(momentDate));
-     console.log("momentDate.format('MMMM - YYYY').toUpperCase() = "+momentDate.format('MMMM - YYYY').toUpperCase())
      var selMonth =  momentDate.format('MMMM - YYYY').toUpperCase();
    }
    else{
      date = this.selDate;
    let momentDate = moment(date);
-   console.log("momentDate = "+momentDate , JSON.stringify(momentDate))
-   console.log("momentDate.format('MMMM - YYYY').toUpperCase() = "+momentDate.format('MMMM - YYYY').toUpperCase())
    return momentDate.format('MMMM - YYYY').toUpperCase();
    }
  }
